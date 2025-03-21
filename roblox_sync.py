@@ -39,8 +39,20 @@ def export_place_to_file():
     except (subprocess.SubprocessError, FileNotFoundError):
         log_message("Rojoが見つからないか、ビルドに失敗しました")
         
-        # Rojoがない場合は、既存のRobloxファイルを使用するか、
-        # 別の方法でファイルを生成する必要があります
+        # カスタムビルドスクリプトを使用
+        try:
+            log_message("カスタムビルドスクリプトを使用してビルドを試みます...")
+            if os.path.exists("build_rbxlx.py"):
+                subprocess.run(["python", "build_rbxlx.py"], check=True)
+                if os.path.exists("game.rbxlx"):
+                    log_message("カスタムビルドスクリプトでビルドに成功しました")
+                    return "game.rbxlx"
+            
+            log_message("カスタムビルドスクリプトでのビルドに失敗しました")
+        except Exception as e:
+            log_message(f"カスタムビルド中にエラーが発生しました: {str(e)}")
+        
+        # 既存のファイルを使用
         if os.path.exists("game.rbxlx"):
             log_message("既存のgame.rbxlxファイルを使用します")
             return "game.rbxlx"

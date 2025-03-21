@@ -26,9 +26,16 @@ jobs:
         with:
           version: '7.x'
       
-      - name: Build with Rojo
+      - name: Build Roblox Place
         run: |
-          rojo build -o game.rbxlx
+          # Rojoでビルドを試みる
+          if command -v rojo &> /dev/null; then
+            echo "Building with Rojo..."
+            rojo build -o game.rbxlx
+          else
+            echo "Rojo not found, using custom build script..."
+            python build_rbxlx.py
+          fi
       
       - name: Upload to Roblox
         env:
