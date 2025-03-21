@@ -145,23 +145,23 @@ local function setupFootstepSystem(character, soundGroups)
     local humanoid = character:WaitForChild("Humanoid")
     local rootPart = character:WaitForChild("HumanoidRootPart")
     
-    -- 足音の種類
+    -- 足音の種類（より静かな足音に変更）
     local footstepSounds = {
         wood = {
-            "rbxassetid://142070127", -- 木の床の足音1
-            "rbxassetid://142070127", -- 木の床の足音2
-            "rbxassetid://142070127"  -- 木の床の足音3
+            "rbxassetid://6333823613", -- 木の床の足音1（静かな足音）
+            "rbxassetid://6333823613", -- 木の床の足音2（静かな足音）
+            "rbxassetid://6333823613"  -- 木の床の足音3（静かな足音）
         },
         tatami = {
-            "rbxassetid://7149255551", -- 畳の足音1
-            "rbxassetid://7149255551", -- 畳の足音2
-            "rbxassetid://7149255551"  -- 畳の足音3
+            "rbxassetid://6333823613", -- 畳の足音1（静かな足音）
+            "rbxassetid://6333823613", -- 畳の足音2（静かな足音）
+            "rbxassetid://6333823613"  -- 畳の足音3（静かな足音）
         }
     }
     
-    -- 足音タイマー
+    -- 足音タイマー（間隔を長くして足音を減らす）
     local lastFootstep = 0
-    local footstepInterval = 0.3
+    local footstepInterval = 0.5
     
     -- 移動中の足音
     RunService.Heartbeat:Connect(function()
@@ -186,12 +186,12 @@ local function setupFootstepSystem(character, soundGroups)
                         soundType = "tatami"
                     end
                     
-                    -- 足音の再生
+                    -- 足音の再生（音量を下げて、再生速度も調整）
                     local soundId = footstepSounds[soundType][math.random(1, #footstepSounds[soundType])]
                     local footstepSound = Instance.new("Sound")
                     footstepSound.SoundId = soundId
-                    footstepSound.Volume = 0.3
-                    footstepSound.PlaybackSpeed = math.random(90, 110) / 100
+                    footstepSound.Volume = 0.1 -- 音量を下げる
+                    footstepSound.PlaybackSpeed = math.random(70, 90) / 100 -- 再生速度を遅くする
                     footstepSound.SoundGroup = soundGroups.sfx
                     footstepSound.Parent = rootPart
                     
