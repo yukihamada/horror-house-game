@@ -164,9 +164,9 @@ local function setupMap()
         end
     end
     
-    -- 伝統的な日本家屋のマップ作成
-    local TraditionalJapaneseHouse = require(script.Parent.TraditionalJapaneseHouse)
-    local map = TraditionalJapaneseHouse.Create(Workspace)
+    -- より本格的な日本家屋のマップ作成
+    local EnhancedJapaneseHouse = require(script.Parent.EnhancedJapaneseHouse)
+    local map = EnhancedJapaneseHouse.Create(Workspace)
 end
 
 -- プレイヤーが鳥居（脱出ポイント）に触れたときの処理
