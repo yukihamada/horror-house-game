@@ -25,6 +25,10 @@ local function initializeGame()
     -- 環境設定
     setupEnvironment()
     
+    -- アイテムの生成
+    local ItemSpawner = require(script.Parent.ItemSpawner)
+    ItemSpawner.SpawnAllItems()
+    
     print("ゲームの初期化が完了しました")
 end
 
