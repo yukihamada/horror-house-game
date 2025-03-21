@@ -9,6 +9,7 @@ local Lighting = game:GetService("Lighting")
 -- モジュールの読み込み
 local MonsterController = require(script.Parent.MonsterController)
 local GameConfig = require(ReplicatedStorage.Shared.GameConfig)
+local SealManager = require(script.Parent.SealManager)
 
 -- 変数
 local gameRunning = false
@@ -86,6 +87,9 @@ local function startGame()
     -- 環境設定の適用
     setupEnvironment()
     
+    -- 封印の札を配置
+    SealManager.Reset()
+    
     -- ゲーム状態の初期化
     gameRunning = true
     gameStartTime = tick()
@@ -141,10 +145,23 @@ local function startGame()
             itemSpawnTimer = 0
             spawnItem()
         end
+        
+        -- プレイヤーが鳥居に到達したかチェック
+        for _, player in pairs(Players:GetPlayers()) do
+            if SealManager.CheckPlayerAtExit(player) then
+                -- ゲームクリア
+                notifyAllPlayers(player.Name .. "が鳥居に到達し、ゲームをクリアしました！")
+                endGame(true, player)
+                break
+            end
+        end
     end
     
-    -- ゲーム終了処理
-    endGame()
+    -- 時間切れの場合
+    if tick() >= gameEndTime then
+        notifyAllPlayers("時間切れです！ゲームオーバー")
+        endGame(false)
+    end
 end
 
 -- モンスター出現関数
@@ -309,7 +326,7 @@ local function applyItemEffect(player, itemType, itemConfig)
 end
 
 -- ゲーム終了関数
-local function endGame()
+local function endGame(isVictory, winningPlayer)
     if not gameRunning then return end
     
     gameRunning = false
@@ -318,11 +335,16 @@ local function endGame()
     -- 全プレイヤーに通知
     local remoteEvents = ReplicatedStorage:FindFirstChild("RemoteEvents")
     if remoteEvents and remoteEvents:FindFirstChild("GameEnded") then
-        remoteEvents.GameEnded:FireAllClients()
+        if isVictory then
+            remoteEvents.GameEnded:FireAllClients(true, winningPlayer and winningPlayer.Name or nil)
+            print("ゲームクリア！")
+            notifyAllPlayers("ゲームクリア！おめでとうございます！")
+        else
+            remoteEvents.GameEnded:FireAllClients(false)
+            print("ゲームオーバー！")
+            notifyAllPlayers("ゲームオーバー！また挑戦してください。")
+        end
     end
-    
-    print("ゲームが終了しました！")
-    notifyAllPlayers("ゲームが終了しました！")
     
     -- モンスターの削除
     MonsterController.RemoveAllMonsters()

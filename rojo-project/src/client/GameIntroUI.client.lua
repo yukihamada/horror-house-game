@@ -119,9 +119,10 @@ local function createGameIntroUI()
     descriptionText.TextXAlignment = Enum.TextXAlignment.Left
     descriptionText.TextYAlignment = Enum.TextYAlignment.Top
     descriptionText.Text = [[
-おばけ屋敷で謎解き！
+おばけ屋敷からの脱出！
 
-• 5つの謎を解こう
+• 3つの封印の札を集めよう
+• 鳥居の封印を解こう
 • おばけから逃げよう
 • WASD：歩く
 • E：物を拾う
