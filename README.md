@@ -74,28 +74,21 @@
 
 ```
 horror-house-game/
-├── rojo-project/              # Rojoプロジェクトフォルダ
-│   ├── default.project.json   # Rojoプロジェクト設定
-│   └── src/                   # ソースコード
-│       ├── client/            # クライアント側スクリプト
-│       ├── server/            # サーバー側スクリプト
-│       └── shared/            # 共有モジュール
 ├── README.md                  # このファイル
 ├── DEVELOPMENT_CHECKLIST.md   # 開発チェックリスト
+├── TODO.md                    # 実装予定機能リスト
 ├── QUICKSTART.md              # クイックスタートガイド
 └── TESTING_CHECKLIST.md       # テストチェックリスト
 ```
 
-### 主要なスクリプト
+### 主要なコンポーネント
 
-- **EnhancedJapaneseHouse.lua**: 本格的な日本家屋のマップ生成
-- **GameStartup.server.lua**: サーバー側の初期化処理
-- **GameManager.server.lua**: ゲーム状態の管理
-- **SealManager.lua**: 封印の札システムの管理
-- **YokaiController.lua**: 妖怪の動作制御
-- **UIController.client.lua**: UI全般の管理
-- **SealUI.client.lua**: 封印の札収集状況表示
-- **GameIntroUI.client.lua**: ゲーム説明画面
+- **マップ生成**: 伝統的な日本家屋の2階建て構造、障子/襖の開閉機能
+- **ゲーム管理**: ゲーム状態の管理、タイマー、プレイヤー参加/退出処理
+- **封印の札システム**: 3つの札の収集と鳥居の封印解除
+- **妖怪AI**: 4種類の妖怪の動作制御と追跡アルゴリズム
+- **UI**: 体力表示、タイマー、封印の札収集状況、ゲーム説明画面
+- **オーディオ**: 環境音、効果音、BGM、妖怪の音
 
 ## 🚀 開発の始め方
 
@@ -105,24 +98,23 @@ horror-house-game/
 
 1. **リポジトリのクローン**:
    ```bash
-   git clone https://github.com/yourusername/horror-house-game.git
+   git clone https://github.com/yukihamada/horror-house-game.git
    cd horror-house-game
    ```
 
-2. **Rojoサーバーの起動**:
-   ```bash
-   cd rojo-project
-   rojo serve --port 56385 --address 0.0.0.0
-   ```
-
-3. **Roblox Studioとの接続**:
+2. **Roblox Studioでの開発**:
    - Roblox Studioを開く
-   - Rojoプラグインを使用して接続（ポート: 56385）
+   - 最新のrbxlxファイルを開く
+   - 必要に応じて編集を行う
 
-4. **最新ビルドの生成**:
-   ```bash
-   rojo build -o japanese-horror-house-final.rbxlx
-   ```
+3. **テストプレイ**:
+   - Roblox Studio内でテストプレイを実行
+   - 動作確認とバグ修正を行う
+
+4. **公開準備**:
+   - ゲーム設定を構成
+   - サムネイルとアイコンを設定
+   - Robloxプラットフォームに公開
 
 ## 📝 更新履歴
 
