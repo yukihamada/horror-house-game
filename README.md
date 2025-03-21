@@ -1,81 +1,146 @@
-# 誰もいないはずの家 - Robloxホラーゲーム
+# 🏮 日本の古民家 - 謎解きと妖怪ゲーム 🏮
 
-## ゲーム概要
-プレイヤーは夜、一人で家にお留守番をしている。突然、誰もいないはずの家の中で不可解な出来事が起こり始める。プレイヤーの目的は家の中を探索し、隠された謎を解き明かして脱出することである。
+<div align="center">
+  <p><em>Robloxで楽しむ日本の古民家を舞台にした謎解きホラーゲーム</em></p>
+</div>
 
-## 機能
-- **探索要素**：家中の引き出しや戸棚、部屋を調べ、アイテムや手がかりを見つける
-- **隠れる・逃げる要素**：物音や不気味な気配がしたら、クローゼットやベッドの下などに隠れる
-- **SAN値システム**：恐怖体験をするとSAN値が低下し、幻覚が見えたり視界が狭くなる
-- **パズルとアイテム収集**：家の謎を解く鍵となるアイテムを集めてパズルを解く
-- **インタラクティブな環境**：家電や照明などがランダムに動作し、プレイヤーを驚かせる
+## 📝 ゲーム概要
 
-## 開発環境
-- Roblox Studio
-- Lua言語
-- Git/GitHub
-- Python (自動デプロイ用)
+**日本の古民家 - 謎解きと妖怪ゲーム**は、古い日本家屋を舞台にした謎解きホラーゲームです。プレイヤーは5分以内に謎を解きながら、様々な日本の妖怪から身を守りつつ脱出を目指します。
 
-## 特徴
+### 🎮 ゲームの特徴
 
-### 継続的インテグレーション/デプロイ (CI/CD)
-このプロジェクトはRoblox Open Cloud APIを使用して、GitHubリポジトリとRobloxプロジェクトを自動的に同期します。
-変更をGitHubにプッシュするだけで、自動的にRobloxゲームが更新されます。
+- **日本の伝統的な古民家**：畳、障子、襖などの和風要素を忠実に再現
+- **5つの謎解き要素**：和歌、家紋、暗号文書、茶室の謎など日本文化に関連した謎
+- **4種類の妖怪**：幽霊、河童、鬼、狐といった日本の伝統的な妖怪が登場
+- **時間制限**：5分以内に謎を解いて脱出する必要がある
+- **モダンなUI**：洗練されたデザインのユーザーインターフェース
 
-### モジュール化された設計
-ゲームの各機能は独立したモジュールとして設計されており、拡張性と保守性に優れています。
+## 🕹️ 操作方法
 
-## クイックスタート
+- **WASD**: 移動
+- **E**: アイテムを調べる/拾う
+- **F**: 提灯のオン/オフ
+- **スペース**: ジャンプ
+- **Tab**: インベントリを開く
 
-### 開発者向け
-1. リポジトリをクローン: `git clone https://github.com/yukihamada/horror-house-game.git`
-2. 依存関係をインストール: `pip install requests`
-3. 詳細は[開発ガイド](DEVELOPMENT.md)を参照
+## 🧩 謎解きのヒント
 
-### プレイヤー向け
-1. Robloxで「誰もいないはずの家」を検索
-2. ゲームをプレイ
+- 和歌や俳句の断片が手がかりになる
+- 家紋や家具の配置に注目
+- 季節や方角に関連する謎がある
+- 古文書に隠された暗号を解読する
+- 特定の順序でアイテムを配置する必要がある
 
-## ファイル構造
+## 👹 妖怪について
+
+| 妖怪 | 特徴 | 対処法 |
+|------|------|--------|
+| **幽霊（ユーレイ）** | 壁をすり抜け、静かに近づいてくる | 提灯の光で一時的に弱らせることができる |
+| **河童（カッパ）** | 水場に潜み、素早く攻撃してくる | 水場を避けて移動する |
+| **鬼（オニ）** | 強力だが動きが遅い | 距離を取って逃げる |
+| **狐（キツネ）** | 幻術を使い、姿を変える | 狐火（青い炎）に注目して本体を見分ける |
+
+## 🛠️ 開発者向け情報
+
+### 技術スタック
+
+- **Roblox Studio**: ゲーム開発環境
+- **Lua**: プログラミング言語
+- **Rojo**: Robloxプロジェクト管理ツール
+
+### プロジェクト構成
+
 ```
 horror-house-game/
-├── .github/workflows/     # GitHub Actions設定
-├── src/
-│   ├── ServerScriptService/  # サーバーサイドスクリプト
-│   │   ├── GameManager.lua   # ゲーム全体の管理
-│   │   ├── EnemyAI.lua       # 敵のAI制御
-│   │   └── InteractiveObject.lua # インタラクティブなオブジェクト
-│   ├── ReplicatedStorage/    # 共有リソース
-│   │   ├── SanitySystem.lua  # SAN値システム
-│   │   └── Events.model.json # イベント定義
-│   ├── StarterGui/           # UI関連
-│   │   ├── UIManager.lua     # UI管理
-│   │   └── MainUI.model.json # UI定義
-│   └── Workspace/            # 3Dモデルなど
-│       └── House.model.json  # 家のモデル
-├── build_rbxlx.py          # ビルドスクリプト
-├── roblox_sync.py          # Roblox同期スクリプト
-├── default.project.json    # Rojoプロジェクト設定
-└── DEVELOPMENT.md          # 開発ガイド
+├── rojo-project/              # Rojoプロジェクトフォルダ
+│   ├── default.project.json   # Rojoプロジェクト設定
+│   └── src/                   # ソースコード
+│       ├── client/            # クライアント側スクリプト
+│       ├── server/            # サーバー側スクリプト
+│       └── shared/            # 共有モジュール
+└── README.md                  # このファイル
 ```
 
-## 主要コンポーネント
-1. **GameManager**: ゲームの状態管理、プレイヤーの参加/退出処理
-2. **EnemyAI**: 敵キャラクターの巡回、追跡、探索行動
-3. **SanitySystem**: プレイヤーのSAN値管理と効果適用
-4. **InteractiveObject**: 調査可能なオブジェクトの処理
-5. **UIManager**: メッセージ表示、インベントリ、SAN値表示などのUI管理
+### 主要なスクリプト
 
-## 自動デプロイ
-このプロジェクトはGitHub Actionsを使用して、変更が`main`ブランチにプッシュされるたびに自動的にRobloxゲームを更新します。
-詳細は[開発ガイド](DEVELOPMENT.md)の「Roblox Open Cloud API連携」セクションを参照してください。
+- **GameStartup.server.lua**: サーバー側の初期化処理
+- **GameStartup.client.lua**: クライアント側の初期化処理
+- **PuzzleController.lua**: 謎解き要素の管理
+- **YokaiController.lua**: 妖怪の動作制御
+- **ModernUI.client.lua**: モダンなUI表示
+- **TimerUI.client.lua**: タイマー表示
+- **GameIntroUI.client.lua**: ゲーム説明画面
 
-## 貢献方法
-1. このリポジトリをフォーク
-2. 機能ブランチを作成: `git checkout -b my-new-feature`
-3. 変更をコミット: `git commit -am 'Add some feature'`
-4. ブランチにプッシュ: `git push origin my-new-feature`
-5. プルリクエストを作成
+## 🚀 リリース手順
 
-## ライセンス
-MIT License
+### Roblox Studioでの開発
+
+1. **Rojoプラグインのインストール**:
+   - Roblox Studioを開く
+   - プラグインタブから「Plugins Marketplace」を開く
+   - 「Rojo」を検索してインストール
+
+2. **Rojoサーバーの起動**:
+   ```bash
+   cd /path/to/horror-house-game/rojo-project
+   rojo serve --port 56385 --address 0.0.0.0
+   ```
+
+3. **Roblox Studioとの接続**:
+   - Roblox Studioでプロジェクトを開く
+   - Rojoプラグインを開く
+   - 「Connect」ボタンをクリック
+   - ホスト名とポート番号を入力: `localhost:56385`
+   - 「Connect」ボタンをクリック
+
+4. **ビルドとエクスポート**:
+   ```bash
+   cd /path/to/horror-house-game/rojo-project
+   rojo build -o japanese-horror-house.rbxlx
+   ```
+
+### Robloxへの公開
+
+1. **Roblox Studioでファイルを開く**:
+   - Roblox Studioを起動
+   - `japanese-horror-house.rbxlx`ファイルを開く
+
+2. **ゲームのテスト**:
+   - 「Play」ボタンをクリックしてゲームをテスト
+   - すべての機能が正常に動作することを確認
+
+3. **Robloxへの公開**:
+   - 「File」→「Publish to Roblox」を選択
+   - ゲームの詳細情報を入力
+   - 「Create」ボタンをクリック
+
+4. **ゲーム設定の構成**:
+   - Robloxウェブサイトでゲームページを開く
+   - 「Configure Game」を選択
+   - 必要な設定（アクセス権限、サーバー設定など）を構成
+   - 変更を保存
+
+## 📝 更新履歴
+
+### v1.0.0 (2023-03-21)
+- 初回リリース
+- 基本的なゲームプレイ機能の実装
+- 5つの謎解き要素の追加
+- 4種類の妖怪の実装
+- モダンなUIデザインの適用
+
+## 🤝 貢献
+
+プロジェクトへの貢献は大歓迎です！バグ報告、機能リクエスト、プルリクエストなどをお待ちしています。
+
+## 📜 ライセンス
+
+このプロジェクトはMITライセンスの下で公開されています。
+
+---
+
+<div align="center">
+  <p>🏮 日本の古民家 - 謎解きと妖怪ゲーム 🏮</p>
+  <p>Developed with ❤️ by OpenHands Team</p>
+</div>
