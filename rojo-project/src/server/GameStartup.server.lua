@@ -25,100 +25,90 @@ local function initializeGame()
     -- 環境設定
     setupEnvironment()
     
-    -- アイテムの生成
-    local ItemSpawner = require(script.Parent.ItemSpawner)
-    ItemSpawner.SpawnAllItems()
+    -- アイテムの生成（アイテムシステムが有効な場合のみ）
+    if script.Parent:FindFirstChild("ItemSpawner") then
+        local ItemSpawner = require(script.Parent.ItemSpawner)
+        ItemSpawner.SpawnAllItems()
+    end
     
     print("ゲームの初期化が完了しました")
 end
 
 -- 環境設定の適用
 local function setupEnvironment()
-    -- 照明設定
-    Lighting.Brightness = 0.1
-    Lighting.Ambient = Color3.new(0.05, 0.05, 0.1)
-    Lighting.OutdoorAmbient = Color3.new(0.1, 0.1, 0.2)
+    -- 照明設定（和風ホラーの雰囲気）
+    Lighting.Brightness = 0.2
+    Lighting.Ambient = Color3.new(0.1, 0.1, 0.15)
+    Lighting.OutdoorAmbient = Color3.new(0.2, 0.2, 0.3)
     
-    -- フォグ設定
-    Lighting.FogStart = 30
-    Lighting.FogEnd = 150
-    Lighting.FogColor = Color3.new(0.05, 0.05, 0.1)
+    -- フォグ設定（ほどよい霧）
+    Lighting.FogStart = 50
+    Lighting.FogEnd = 200
+    Lighting.FogColor = Color3.new(0.1, 0.1, 0.15)
     
-    -- 時間設定（夜間）
-    Lighting.ClockTime = 0 -- 真夜中
+    -- 時間設定（夕暮れ時）
+    Lighting.ClockTime = 18.5 -- 夕暮れ
     
     -- 追加エフェクト
     local blur = Instance.new("BlurEffect")
-    blur.Size = 4
+    blur.Size = 2
     blur.Parent = Lighting
     
     local colorCorrection = Instance.new("ColorCorrectionEffect")
-    colorCorrection.Brightness = -0.15
-    colorCorrection.Contrast = 0.15
-    colorCorrection.Saturation = -0.3
-    colorCorrection.TintColor = Color3.new(0.7, 0.7, 1)
+    colorCorrection.Brightness = -0.05
+    colorCorrection.Contrast = 0.1
+    colorCorrection.Saturation = -0.1
+    colorCorrection.TintColor = Color3.new(0.9, 0.8, 0.7) -- 夕暮れの暖かい色調
     colorCorrection.Parent = Lighting
     
-    -- 大気効果
+    -- 大気効果（軽い霞）
     local atmosphere = Instance.new("Atmosphere")
-    atmosphere.Density = 0.5
+    atmosphere.Density = 0.3
     atmosphere.Offset = 0.25
-    atmosphere.Color = Color3.fromRGB(110, 110, 150)
-    atmosphere.Decay = Color3.fromRGB(30, 30, 50)
-    atmosphere.Glare = 0.2
-    atmosphere.Haze = 2
+    atmosphere.Color = Color3.fromRGB(199, 170, 107) -- 夕焼け色
+    atmosphere.Decay = Color3.fromRGB(92, 60, 13)
+    atmosphere.Glare = 0.3
+    atmosphere.Haze = 1.5
     atmosphere.Parent = Lighting
     
-    -- 雨の効果
-    local rain = Instance.new("ParticleEmitter")
-    rain.Name = "Rain"
-    rain.EmissionDirection = Enum.NormalId.Top
-    rain.Lifetime = NumberRange.new(5, 8)
-    rain.Rate = 100
-    rain.Speed = NumberRange.new(50, 70)
-    rain.SpreadAngle = Vector2.new(30, 30)
-    rain.Texture = "rbxassetid://7071564220" -- 雨のテクスチャ
-    rain.Transparency = NumberSequence.new({
-        NumberSequenceKeypoint.new(0, 0.7),
-        NumberSequenceKeypoint.new(1, 1)
-    })
-    rain.Size = NumberSequence.new({
-        NumberSequenceKeypoint.new(0, 0.1),
-        NumberSequenceKeypoint.new(1, 0.1)
-    })
-    rain.Acceleration = Vector3.new(0, -100, 0)
-    rain.Drag = 1
-    rain.LockedToPart = true
-    rain.Parent = Workspace.Terrain
+    -- 環境音（虫の音、風の音）
+    local ambientSound = Instance.new("Sound")
+    ambientSound.Name = "AmbientSound"
+    ambientSound.SoundId = "rbxassetid://142376088" -- 虫の音
+    ambientSound.Volume = 0.3
+    ambientSound.Looped = true
+    ambientSound.Parent = Workspace
+    ambientSound:Play()
     
-    -- 雷の効果
+    local windSound = Instance.new("Sound")
+    windSound.Name = "WindSound"
+    windSound.SoundId = "rbxassetid://5977154884" -- 風の音
+    windSound.Volume = 0.2
+    windSound.Looped = true
+    windSound.Parent = Workspace
+    windSound:Play()
+    
+    -- 不気味な音を時々再生
     spawn(function()
+        local creepySounds = {
+            "rbxassetid://9125626120", -- うめき声
+            "rbxassetid://5567523997", -- 叫び声
+            "rbxassetid://1565473107"  -- 囁き声
+        }
+        
         while true do
-            wait(math.random(20, 60))
+            wait(math.random(30, 120)) -- 30秒〜2分ごとにランダムに再生
             
-            -- 雷の光
-            local lightning = Instance.new("ColorCorrectionEffect")
-            lightning.Brightness = 0.5
-            lightning.Contrast = 0.1
-            lightning.Saturation = -0.1
-            lightning.TintColor = Color3.new(1, 1, 1)
-            lightning.Parent = Lighting
-            
-            -- 雷の音
-            local thunderSound = Instance.new("Sound")
-            thunderSound.SoundId = "rbxassetid://5982028147" -- 雷の音
-            thunderSound.Volume = 1
-            thunderSound.PlaybackSpeed = math.random(80, 120) / 100
-            thunderSound.Parent = Workspace
-            thunderSound:Play()
-            
-            -- 効果を一瞬だけ表示
-            wait(0.1)
-            lightning:Destroy()
+            local randomSound = Instance.new("Sound")
+            randomSound.SoundId = creepySounds[math.random(1, #creepySounds)]
+            randomSound.Volume = 0.2
+            randomSound.PlaybackSpeed = math.random(80, 120) / 100
+            randomSound.Parent = Workspace
+            randomSound:Play()
             
             -- 音が終わったら削除
-            thunderSound.Ended:Connect(function()
-                thunderSound:Destroy()
+            randomSound.Ended:Connect(function()
+                randomSound:Destroy()
             end)
         end
     end)
