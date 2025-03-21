@@ -1,0 +1,90 @@
+{
+  "Name": "House",
+  "ClassName": "Model",
+  "Children": [
+    {
+      "Name": "Floor1",
+      "ClassName": "Model",
+      "Children": [
+        {
+          "Name": "Floor",
+          "ClassName": "Part",
+          "Properties": {
+            "Anchored": true,
+            "Size": [50, 1, 50],
+            "Position": [0, 0, 0],
+            "Color": [0.627, 0.627, 0.627],
+            "Material": "SmoothPlastic"
+          }
+        },
+        {
+          "Name": "Wall1",
+          "ClassName": "Part",
+          "Properties": {
+            "Anchored": true,
+            "Size": [50, 10, 1],
+            "Position": [0, 5, 25],
+            "Color": [0.941, 0.941, 0.941],
+            "Material": "SmoothPlastic"
+          }
+        },
+        {
+          "Name": "Wall2",
+          "ClassName": "Part",
+          "Properties": {
+            "Anchored": true,
+            "Size": [50, 10, 1],
+            "Position": [0, 5, -25],
+            "Color": [0.941, 0.941, 0.941],
+            "Material": "SmoothPlastic"
+          }
+        },
+        {
+          "Name": "Wall3",
+          "ClassName": "Part",
+          "Properties": {
+            "Anchored": true,
+            "Size": [1, 10, 50],
+            "Position": [25, 5, 0],
+            "Color": [0.941, 0.941, 0.941],
+            "Material": "SmoothPlastic"
+          }
+        },
+        {
+          "Name": "Wall4",
+          "ClassName": "Part",
+          "Properties": {
+            "Anchored": true,
+            "Size": [1, 10, 50],
+            "Position": [-25, 5, 0],
+            "Color": [0.941, 0.941, 0.941],
+            "Material": "SmoothPlastic"
+          }
+        },
+        {
+          "Name": "EntranceDoor",
+          "ClassName": "Part",
+          "Properties": {
+            "Anchored": true,
+            "Size": [5, 8, 1],
+            "Position": [0, 4, -25],
+            "Color": [0.388, 0.278, 0.176],
+            "Material": "Wood",
+            "Transparency": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "Name": "SpawnLocation",
+      "ClassName": "SpawnLocation",
+      "Properties": {
+        "Anchored": true,
+        "Size": [6, 1, 6],
+        "Position": [0, 1, -20],
+        "Color": [0.388, 0.388, 0.388],
+        "Material": "SmoothPlastic"
+      }
+    }
+  ]
+}
