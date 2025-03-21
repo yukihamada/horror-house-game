@@ -40,8 +40,8 @@ jobs:
       - name: Upload to Roblox
         env:
           ROBLOX_API_KEY: ${{ secrets.ROBLOX_API_KEY }}
-          PLACE_ID: ${{ secrets.PLACE_ID }}
-          UNIVERSE_ID: ${{ secrets.UNIVERSE_ID }}
+          PLACE_ID: "11150575352"
+          UNIVERSE_ID: "3987796973"
         run: |
           # APIキーを環境変数から取得するようにスクリプトを修正
           cat > upload.py << 'EOF'
